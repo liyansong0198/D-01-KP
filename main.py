@@ -1,8 +1,7 @@
 import numpy as np
 import re
-f = open("idkp1-10.txt")
+import matplotlib.pyplot as plt
 # 调用文件的 readline()方法
-line = f.readline()  # 每次读取一行内容
 profitlist=[]
 weightlist=[]
 profitdatalist=[]
@@ -10,25 +9,29 @@ weightdatalist=[]
 profit=[]
 weight=[]
 dpw=[]
-while line:
-    # print(line, end='')  # end = ''表示不换行
-    # print(line)  # 默认换行
+def data(textname):
+    f = open(textname)
     line = f.readline()
-    if line.__contains__("profit"):
-        profitdata=re.sub('[.\n]', '', f.readline()).strip(',')
-        profitdatalist.append(profitdata)
-    elif line.__contains__("weight"):
-        weightdata=re.sub('[.\n]', '', f.readline())
-        #print(weightdata)
-        weightdatalist.append(weightdata)
-p_list=[]
-w_list=[]
-pw_list=[]
-t_p_list=[]
-t_w_list=[]
-pw=[]
-for i in range(len(profitdatalist)):
-    num=0
+    while line:
+        # print(line, end='')  # end = ''表示不换行
+        # print(line)  # 默认换行
+        line = f.readline()
+        if line.__contains__("profit"):
+            profitdata=re.sub('[.\n]', '', f.readline()).strip(',')
+            profitdatalist.append(profitdata)
+        elif line.__contains__("weight"):
+            weightdata=re.sub('[.\n]', '', f.readline()).strip(',')
+            #print(weightdata)
+            weightdatalist.append(weightdata)
+    p_list=[]
+    w_list=[]
+    pw_list=[]
+    t_p_list=[]
+    t_w_list=[]
+    dpw=[]
+    print(profitdatalist[0])
+    for i in range(len(profitdatalist)):
+        num=0
     profitlist = str(profitdatalist[i]).split(',')
     weightlist = str(weightdatalist[i]).split(',')
     for j in range(len(profitlist)):
@@ -45,4 +48,39 @@ for i in range(len(profitdatalist)):
     profit.append(profitlist)
     weight.append(weightlist)
     dpw.append(pw_list)
-print(pw_list)
+    print('数据读取成功')
+    print('重量信息')
+    #print(weight)
+    print('价格信息')
+    #print(profit)
+    print('价格重量信息')
+    #print(dpw)
+    #print(profitdatalist[0])
+
+def pwscatter(n):
+    #matplotlib画图中文显示会有问题，让中文能够正确显示
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+    plt.rcParams['axes.unicode_minus'] = False
+    profitPoint=profitdatalist[0].split(',')
+    print(profitPoint)
+    #exit;
+    weightPoint=weightdatalist[0].split(',')
+    #print(weightPoint)
+    plt.xlim(0, 2000)
+    plt.ylim(0, 2000)
+    plt.xlabel('重量')
+    plt.ylabel('价值')
+    area = np.pi * 2*2
+    colors1 = '#00CED1'  # 点的颜色
+    for i in range(len(profitPoint)):
+        plt.scatter(int(weightPoint[i]),int(profitPoint[i]),s=area,c=colors1)
+    plt.show()
+def pwsort():
+
+if __name__=="__main__":
+    textname=input("请输入您要操作的文件名")
+    data("idkp1-10.txt")
+    n=input("请输入您需要绘制散点图的组数")
+    pwscatter(n)
+    pwsort()
+
