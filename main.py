@@ -2,6 +2,7 @@ import numpy as np
 import re
 import matplotlib.pyplot as plt
 import operator
+import time
 # 调用文件的 readline()方法
 profitlist=[]
 weightlist=[]
@@ -78,24 +79,45 @@ def pwscatter(n):
         plt.scatter(int(weightPoint[i]),int(profitPoint[i]),s=area,c=colors1,alpha=0.4)
     plt.show()
 def twpsort(n):
-    print(sorted(dpw[n], key=operator.itemgetter(-1), reverse=True))
-#def recall(x,y)
+    twp_sort=sorted(dpw[n], key=operator.itemgetter(-1), reverse=True)
+    print(twp_sort)
+def recall(max_height,x,y,new_profit,new_weight,totalprofit,totalweight):
+    if y != 3:
+        totalprofit=totalprofit+new_profit[x][y]
+        totalweight=totalweight+new_weight[x][y]
+    if totalweight>max_height:
+        return 0
+    if x == len(new_profit)-1:
+        ret.append(totalprofit)
+        return 0
+    for i in range(4):
+        recall(max_height,x+1,i,new_profit,new_weight,totalprofit,totalweight)
+    return 0
 if __name__=="__main__":
-    textname=input("请输入您要操作的文件名\n")
-    data(textname)
+    #textname=input("请输入您要操作的文件名\n")
+    data("idkp1-10.txt")
     while(1):
         m = int(input('请选择您的操作:\n1.绘制散点图\n2.非递增排序\n3.回溯算法\n'))
         if m == 1:
             n=int(input("请输入您需要绘制散点图的组数\n"))
             pwscatter(n-1)
-            continue
         if m == 2:
             n=int(input("请输入非递增排序的组数\n"))
             twpsort(n-1)
-            continue
         if m == 3:
             n=int(input("请输入您需要执行的组数\n"))
-            totalprofit=[0,0,0]+profit[n-1]
-            print(profit)
-    # print(profitdatalist[0])
-    # print(sorted(dpw[2], key=operator.itemgetter(-1), reverse=True)
+            max_height=int(input("请输入本组中背包的最大重量\n"))
+            new_profit=[[0,0,0]]+profit[n-1]
+            new_weight=[[0,0,0]]+weight[n-1]
+            x=0
+            y=0
+            totalprofit=0
+            totalweight=0
+            ret=[];
+            t = time.time()
+            recall(max_height,x,y,new_profit,new_weight,totalprofit,totalweight)
+            ret.sort()
+            print(ret[-1])
+            t1 = time.time()
+            print(t1-t)
+
