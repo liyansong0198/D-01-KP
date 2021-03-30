@@ -1,6 +1,7 @@
 import numpy as np
 import re
 import matplotlib.pyplot as plt
+import operator
 # 调用文件的 readline()方法
 profitlist=[]
 weightlist=[]
@@ -28,6 +29,7 @@ def data(textname):
     pw_list=[]
     t_p_list=[]
     t_w_list=[]
+    t_wp_list=[]
     dpw=[]
     print(profitdatalist[0])
     for i in range(len(profitdatalist)):
@@ -37,13 +39,15 @@ def data(textname):
     for j in range(len(profitlist)):
         t_p_list.append(int(profitlist[j]))
         t_w_list.append(int(weightlist[j]))
+        t_wp_list.append(int(profitlist[j])/int(weightlist[j]))
         num=num+1
         if num==3:
             p_list.append(t_p_list)
             w_list.append(t_w_list)
-            pw_list.append(t_p_list+t_w_list)
+            pw_list.append(t_p_list+t_w_list+t_wp_list)
             t_p_list=[]
             t_w_list=[]
+            t_wp_list=[]
             num=0
     profit.append(profitlist)
     weight.append(weightlist)
@@ -75,12 +79,14 @@ def pwscatter(n):
     for i in range(len(profitPoint)):
         plt.scatter(int(weightPoint[i]),int(profitPoint[i]),s=area,c=colors1)
     plt.show()
-def pwsort():
 
+def twpsort(n):
+    print(dpw[n])
+    dpw[n].sort(key = operator.itemgetter(-1))
+    print(dpw[n])
 if __name__=="__main__":
-    textname=input("请输入您要操作的文件名")
+    #textname=input("请输入您要操作的文件名")
     data("idkp1-10.txt")
     n=input("请输入您需要绘制散点图的组数")
-    pwscatter(n)
-    pwsort()
-
+    #pwscatter(n)
+    twpsort(2)
