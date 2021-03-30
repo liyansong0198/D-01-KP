@@ -79,6 +79,7 @@ def pwscatter(n):
     plt.show()
 def twpsort(n):
     print(sorted(dpw[n], key=operator.itemgetter(-1), reverse=True))
+#def recall(x,y)
 if __name__=="__main__":
     textname=input("请输入您要操作的文件名\n")
     data(textname)
@@ -86,13 +87,15 @@ if __name__=="__main__":
         m = int(input('请选择您的操作:\n1.绘制散点图\n2.非递增排序\n3.回溯算法\n'))
         if m == 1:
             n=int(input("请输入您需要绘制散点图的组数\n"))
-            pwscatter(n)
+            pwscatter(n-1)
             continue
         if m == 2:
             n=int(input("请输入非递增排序的组数\n"))
-            twpsort(n)
+            twpsort(n-1)
             continue
         if m == 3:
-            n=int(input)
+            n=int(input("请输入您需要执行的组数\n"))
+            totalprofit=[0,0,0]+profit[n-1]
+            print(profit)
     # print(profitdatalist[0])
     # print(sorted(dpw[2], key=operator.itemgetter(-1), reverse=True)
