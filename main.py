@@ -89,9 +89,10 @@ if __name__=="__main__":
             pwscatter(n)
             continue
         if m == 2:
-            print(m)
             n=int(input("请输入非递增排序的组数\n"))
             twpsort(n)
             continue
+        if m == 3:
+            n=int(input)
     # print(profitdatalist[0])
-    # print(sorted(dpw[2], key=operator.itemgetter(-1), reverse=True))
+    # print(sorted(dpw[2], key=operator.itemgetter(-1), reverse=True)
