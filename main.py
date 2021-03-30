@@ -117,7 +117,10 @@ if __name__=="__main__":
             t = time.time()
             recall(max_height,x,y,new_profit,new_weight,totalprofit,totalweight)
             ret.sort()
-            print(ret[-1])
+            print(int(ret[-1]))
             t1 = time.time()
-            print(t1-t)
-
+            solve_time=t1-t
+            f = open("1.txt", "w+")
+            f.write("组数\t最优解\t求解时间\n")
+            f.write(str(n)+ "\t" + str(ret[-1])+"\t"+str(solve_time)+ "\n")
+            f.close()
