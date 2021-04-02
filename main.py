@@ -85,9 +85,9 @@ def getdata(textname):
         profit_weight_pwradio_list.append(temporary_pw_radio_list)
     print('数据读取成功！')
     print('数据读取结果如下')
-    print('重量')
+    print('商品价值')
     print(profit_end_list)
-    print('价值')
+    print('商品重量')
     print(weight_end_list)
     print('重量/价值/重量：价值系数')
     print(profit_weight_pwradio_list)
@@ -105,8 +105,9 @@ def pw_scatter(n):
     plt.rcParams['axes.unicode_minus'] = False
     profit_Point=profitdata_list[0].split(',')
     weight_Point=weightdata_list[0].split(',')
-    plt.xlim(0, 2500)
-    plt.ylim(0, 2500)
+    plt.title('重量价值散点图')
+    plt.xlim(0, 2100)
+    plt.ylim(0, 2100)
     plt.xlabel('重量')
     plt.ylabel('价值')
     area = np.pi *6*6
@@ -174,6 +175,7 @@ if __name__=="__main__":
             print(int(ret[-1]))
             t1 = time.time()
             solve_time=t1-t
+            print(solve_time)
             file = open("1.txt", "w+")
             file.write("组数\t最优解\t求解时间\n")
             file.write(str(n)+ "\t" + str(ret[-1])+"\t"+str(solve_time)+ "\n")
