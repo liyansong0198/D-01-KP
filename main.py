@@ -147,12 +147,32 @@ def recall(max_height,x,y,new_profit,new_weight,totalprofit,totalweight):
     for i in range(4):
         recall(max_height,x+1,i,new_profit,new_weight,totalprofit,totalweight)
     return 0
-
+#************************************************************************
+#   Description:使用动态规划算法求解指定D{0-1} KP数据的最优解和求解时间
+#   Input: max_hieght:背包的最大容量 n=数组中的组数
+#   totalprofit:背包中总价值 totalweight:背包中总重量
+#   Output:
+#   Return:
+#   others:
+#************************************************************************
+def dp(n,m):
+    dp_profit=profit_end_list[n]
+    dp_weight=profit_end_list[n]
+    dp_result=[];
+    for i in range(max_weight + 1):
+         dp_result.append(0)
+    print(dp_profit)
+    for i in range(len(dp_profit)):
+        for j in range(max_weight,-1,-1):
+            for k in range(3):
+                if j>=dp_weight[i][k]:
+                    dp_result[j]=max(dp_result[j],dp_[j-dp_weight[i][k]]+dp_profit[i][k])
+    print(dp_result)
 if __name__=="__main__":
     textname=input("请输入您要操作的文件名\n")
     getdata(textname)
     while(1):
-        m = int(input('请选择您的操作:\n1.绘制散点图\n2.非递增排序\n3.回溯算法\n'))
+        m = int(input('请选择您的操作:\n1.绘制散点图\n2.非递增排序\n3.回溯算法\n4.动态规划算法\n'))
         if m == 1:
             n=int(input("请输入您需要绘制散点图的组数\n"))
             pw_scatter(n-1)
@@ -170,7 +190,7 @@ if __name__=="__main__":
             totalweight=0
             ret=[];
             t = time.time()
-            recall(max_height,x,y,new_profit,new_weight,totalprofit,totalweight)
+            recall(max_weight,x,y,new_profit,new_weight,totalprofit,totalweight)
             ret.sort()
             print(int(ret[-1]))
             t1 = time.time()
@@ -180,3 +200,7 @@ if __name__=="__main__":
             file.write("组数\t最优解\t求解时间\n")
             file.write(str(n)+ "\t" + str(ret[-1])+"\t"+str(solve_time)+ "\n")
             file.close()
+        if m==4:
+            n = int(input("请输入您需要执行的组数\n"))
+            max_weight = int(input("请输入本组中背包的最大重量\n"))
+            dp(n-1,max_weight)
